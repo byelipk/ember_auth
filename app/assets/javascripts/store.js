@@ -7,3 +7,8 @@ App.Store = DS.Store.extend({
 App.ApplicationAdapter = DS.ActiveModelAdapter.extend({
 
 });
+
+// Allow smooth normalizing/serializing between Ember and Rails
+App.ApplicationSerializer = DS.ActiveModelSerializer.extend({
+
+});

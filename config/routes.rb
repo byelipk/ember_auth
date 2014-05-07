@@ -1,4 +1,6 @@
 EmberAuth::Application.routes.draw do
+  root 'home#index'
+
   resources :users, except: [:new, :edit, :destroy]
   post 'session' => 'session#create'
 
