@@ -11,4 +11,7 @@ App.Router.map(function() {
   });
 
   this.route('top_secret');
+
+  // Just for playing around with routes
+  this.route('time');
 });

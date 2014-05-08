@@ -1,13 +1,13 @@
 // for more details see: http://emberjs.com/guides/controllers/
 
-App.UsersNewController = Ember.Controller.extend({
+App.UsersNewController = Ember.ObjectController.extend({
   reset: function() {
     this.setProperties({
       name: '',
       email: '',
       username: '',
       password: '',
-      passwordConfirmation: '',
+      password_confirmation: '',
       errorMessage: null,
     });
   },
@@ -15,39 +15,20 @@ App.UsersNewController = Ember.Controller.extend({
   actions: {
     createUser: function() {
       var self = this;
-      var router = self.get('target');
-      var data = self.getProperties('name', 'email', 'username', 'password', 'password_confirmation')
-      var user = self.get('model');
+      var router = this.get('target');
+      var data = this.getProperties('name', 'email', 'username', 'password', 'password_confirmation');
+      var user = this.get('model');
 
-      self.set('errorMessage', null);
+      $.post('/users', { user: data }, function(results) {
+        App.AuthManager.authenticate(results.api_key.access_token, results.api_key.user_id);
+        router.transitionTo('index');
 
-      $.ajax({
-        url: '/users',
-        type: 'post',
-        dataType: 'json',
-        data: { user: data },
-
-        beforeSend: function(xhr, settings) {
-
-        },
-
-        success: function(results, status, xhr) {
-          App.AuthManager.authenticate(results.api_key.access_token, results.api_key.user_id);
-          router.transitionTo('index');
-        },
-
-        error: function(xhr, status, error) {
-          self.set('errorMessage', 'Please fill out the form before submitting.')
-
-        },
-
-        complete: function(xhr, status) {
-
+      }).fail(function(jqxhr, textStatus, error ) {
+        if (jqxhr.status === 422) {
+          errs = JSON.parse(jqxhr.responseText)
+          user.set('errors', errs.errors);
         }
-
-      }).then(function(stuff) {
-        alert(stuff)
-      })
+      });
     }
   }
 });

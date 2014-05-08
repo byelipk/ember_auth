@@ -12,29 +12,34 @@
 
     <form role="form" {{action "createUser" on="submit"}}>
       <div class="form-group">
-        <label for="exName">Full Name</label>
-        {{input type="text" value=name id="exName" placeholder="Full Name" class="form-control"}}
+        <label for="name">Full Name</label>
+        {{input type="text" value=name id="name" placeholder="Full Name" class="form-control"}}
+        <small>{{errors.name}}</small>
       </div>
 
       <div class="form-group">
-        <label for="exEmail">Email address</label>
-        {{input type="text" value=email id="exEmail" placeholder="Email" class="form-control"}}
+        <label for="email">Email address</label>
+        {{input type="text" value=email id="email" placeholder="Email" class="form-control"}}
+        <small>{{errors.email}}</small>
       </div>
 
       <div class="form-group">
-        <label for="exUser">Username</label>
-        {{input type="text" value=username id="exUser" placeholder="Username" class="form-control"}}
+        <label for="username">Username</label>
+        {{input type="text" value=username id="username" placeholder="Username" class="form-control"}}
+        <small>{{errors.username}}</small>
       </div>
 
       <div class="form-group">
-        <label for="exPass">Password</label>
-        {{input type="password" value=password id="exPass" placeholder="Password" class="form-control"}}
+        <label for="pword">Password</label>
+        {{input type="password" value=password id="pword" placeholder="Password" class="form-control"}}
+        <small>{{errors.password}}</small>
       </div>
 
       <div class="form-group">
-        <label for="exPassConf">Password Confirmation</label>
-        {{input type="password" value=password_confirmation id="exPassConf"
+        <label for="pwordconf">Password Confirmation</label>
+        {{input type="password" value=password_confirmation id="pwordconf"
         placeholder="Password Confirmation" class="form-control"}}
+        <small>{{errors.password_confirmation}}</small>
       </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>
