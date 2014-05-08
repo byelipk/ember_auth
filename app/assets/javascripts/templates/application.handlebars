@@ -11,14 +11,21 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
+        <li>{{#link-to 'index'}}Index{{/link-to}}</li>
         <li>{{#link-to 'top_secret'}}Top Secret{{/link-to}}</li>
-        <li>{{#link-to 'users.new'}}Register{{/link-to}}</li>
-        <li>{{#link-to 'sessions.new'}}Login{{/link-to}}</li>
+
+        {{#if isAuthenticated}}
+          <li><a href="#">{{currentUser.email}}</a></li>
+          <li><a href="#"{{action 'logout'}}>Logout</a></li>
+        {{else}}
+          <li>{{#link-to 'users.new'}}Register{{/link-to}}</li>
+          <li>{{#link-to 'sessions.new'}}Login{{/link-to}}</li>
+        {{/if}}
       </ul>
     </div><!--/.nav-collapse -->
   </div>
 </div>
 
-<div class="container">
+<div class="main container">
   {{outlet}}
 </div>

@@ -1,0 +1,37 @@
+
+
+<div class="row">
+  <div class="col-sm-4">
+
+    <h2>Register</h2>
+    <br>
+
+    <form role="form" {{action "createUser" on="submit"}}>
+      <div class="form-group">
+        <label for="exName">Full Name</label>
+        {{input type="text" value=name id="exName" placeholder="Full Name" class="form-control"}}
+      </div>
+
+      <div class="form-group">
+        <label for="exEmail">Email address</label>
+        {{input type="text" value=email id="exEmail" placeholder="Email" class="form-control"}}
+      </div>
+
+      <div class="form-group">
+        <label for="exUser">Username</label>
+        {{input type="text" value=username id="exUser" placeholder="Username" class="form-control"}}
+      </div>
+      <div class="form-group">
+        <label for="exPass">Password</label>
+        {{input type="password" value=password id="exPass" placeholder="Password" class="form-control"}}
+      </div>
+      <div class="form-group">
+        <label for="exPassConf">Password Confirmation</label>
+        {{input type="password" value=password_confirmation id="exPassConf"
+        placeholder="Password Confirmation" class="form-control"}}
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
