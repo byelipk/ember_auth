@@ -23,6 +23,7 @@ App.AuthManager = Ember.Object.extend({
     // Get a handle on the application route to access the data store
     context = App.__container__.lookup('route:application');
 
+    // Set the auth header before we access the data store and make an xhr request
     $.ajaxSetup({
       headers: { 'Authorization': 'Bearer ' + accessToken }
     });

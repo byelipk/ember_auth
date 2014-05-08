@@ -1,12 +1,26 @@
 // for more details see: http://emberjs.com/guides/controllers/
 
 App.UsersNewController = Ember.Controller.extend({
+  reset: function() {
+    this.setProperties({
+      name: '',
+      email: '',
+      username: '',
+      password: '',
+      passwordConfirmation: '',
+      errorMessage: null,
+    });
+  },
+
   actions: {
     createUser: function() {
-      var router = this.get('target');
-      var data = this.getProperties('name', 'email', 'username', 'password', 'password_confirmation')
-      var user = this.get('model');
-      
+      var self = this;
+      var router = self.get('target');
+      var data = self.getProperties('name', 'email', 'username', 'password', 'password_confirmation')
+      var user = self.get('model');
+
+      self.set('errorMessage', null);
+
       $.ajax({
         url: '/users',
         type: 'post',
@@ -14,7 +28,7 @@ App.UsersNewController = Ember.Controller.extend({
         data: { user: data },
 
         beforeSend: function(xhr, settings) {
-        
+
         },
 
         success: function(results, status, xhr) {
@@ -23,14 +37,12 @@ App.UsersNewController = Ember.Controller.extend({
         },
 
         error: function(xhr, status, error) {
-          console.log(xhr)
-          console.log(status)
-          console.log(error)
-        
+          self.set('errorMessage', 'Please fill out the form before submitting.')
+
         },
 
         complete: function(xhr, status) {
-        
+
         }
 
       }).then(function(stuff) {
